@@ -14,10 +14,10 @@ def save_to_csv(profiles):
 def save_image(profiles):
     for profile in profiles:
         name = profile.get("name")
-        age = profile.get("age")
         img_data = requests.get(profile.get("image_src")).content
+        print(f"GET]{name}: {img_data}")
         if img_data:
-            with open(f"{name}({age}).jpg", 'wb') as handler:
+            with open(f"{name}.jpg", 'wb') as handler:
                 handler.write(img_data)
 
 

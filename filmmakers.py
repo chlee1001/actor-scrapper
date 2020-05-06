@@ -29,9 +29,9 @@ def extract_profile(html):
     return {"name": name, "age": age, "image_src": image_src}
 
 
-def get_profiles():
+def extract_profiles(last_page):
     profiles = []
-    for page in range(max_page):
+    for page in range(1, last_page):
         print(f"Scrapping Film Makers: Page {page}")
         result = requests.get(f"{URL}&page={page}")
         soup = BeautifulSoup(result.text, "html.parser")
@@ -40,3 +40,9 @@ def get_profiles():
             profile = extract_profile(result)
             profiles.append(profile)
     return profiles
+
+
+def get_profiles():
+    last_page = max_page
+    jobs = extract_profiles(last_page)
+    return jobs
