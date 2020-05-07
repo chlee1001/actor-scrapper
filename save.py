@@ -17,7 +17,7 @@ def save_image(profiles):
         img_data = requests.get(profile.get("image_src")).content
         print(f"GET]{name}: {img_data}")
         if img_data:
-            with open(f"{name}.jpg", 'wb') as handler:
+            with open(f"./남자/{name}.jpg", 'wb') as handler:
                 handler.write(img_data)
 
 
