@@ -2,6 +2,14 @@
 
 Scrapping profile photo (FilmMakers, Megaphone korea)
 
-### main.py 실행
+## Profile scrapper
 
-### csv파일 생성 이후 에러 시, save_by_csv.py
+run main.py
+
+if error occur after creating csv file, run save_by_csv.py
+
+## Keyword scrapper
+
+run naver.py
+
+    python naver.py -name [keyword]

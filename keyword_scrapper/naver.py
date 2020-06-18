@@ -43,41 +43,53 @@ def cropFace(filenames):
             imgNum += 1
 
 
-def main():
+def getImages(pageNumber):
     # 네이버 url https://search.naver.com/search.naver?where=image&sm=tab_jum&query=%EC%97%AC%EC%9A%B0%EC%83%81
     url_info = "https://search.naver.com/search.naver?"
     params = {
         "query": people,
         "where": "image",
-        "face": 1
+        "face": 1,
+        "start": pageNumber*50
     }
     html_object = req.get(url_info, params)
 
-    if html_object.status_code == 200:
+    img_data = []
 
+    if html_object.status_code == 200:
         bs_object = BeautifulSoup(html_object.text, "html.parser")
         img_data = bs_object.find_all("img", {"class": "_img"})
 
-        imgNames = []
+    return img_data
 
-        for i, img in enumerate(img_data):
-            url = bigImageUrl(img['data-source'])
-            filetype = url.split(".")[-1]
 
-            if filetype != "jpg":
-                continue
+def main():
+    img_datas = []
 
-            t = urlopen(url).read()
-            filename = str(i+1) + "." + filetype
+    for i in range(20):
+        img_datas = img_datas + getImages(i)
 
-            with open(filename, "wb") as f:
-                f.write(t)
+    imgNames = []
 
-            print(f"[{filename}]: Img Save Success")
-            imgNames.append(filename)
+    for i, img in enumerate(img_datas):
+        url = bigImageUrl(img['data-source'])
+        filetype = url.split(".")[-1]
 
-        print(imgNames)
-        cropFace(imgNames)
+        if filetype != "jpg":
+            continue
+
+        t = urlopen(url).read()
+        filename = str(i+1) + "." + filetype
+
+        with open(filename, "wb") as f:
+            f.write(t)
+
+        print(f"[{filename}]: Img Save Success")
+        imgNames.append(filename)
+
+    # imgNames.reverse()
+    print(imgNames)
+    cropFace(imgNames)
 
 
 if __name__ == "__main__":
