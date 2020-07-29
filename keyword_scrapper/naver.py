@@ -24,9 +24,10 @@ def make_dirs(dir):
 
 def make_all_dirs():
     # 3개의 폴더 생성
-    make_dirs("흑백")
-    make_dirs("컬러")
-    make_dirs("원본")
+    make_dirs(people)
+    make_dirs(f"{people}/흑백")
+    make_dirs(f"{people}/컬러")
+    make_dirs(f"{people}/원본")
 
 
 def imwrite(filename, img, params=None):
@@ -52,7 +53,7 @@ def bigImageUrl(url):
 
 def save_original_image(url, filetype, i):
     t = urlopen(url).read()
-    filename = f"원본/{people}" + str(i) + f".{filetype}"
+    filename = f"{people}/원본/{people}" + str(i) + f".{filetype}"
 
     with open(filename, "wb") as f:
         f.write(t)
@@ -89,9 +90,9 @@ def cropFace(imgUrls):
             # 눈 두개가 확인된 경우
             if(len(eyes) == 2):
                 # 이미지를 저장
-                imwrite(f"컬러/crop_{people}" +
+                imwrite(f"{people}/컬러/{people}" +
                         str(imgNum) + f".{filetype}", cropped)
-                imwrite(f"흑백/gray_{people}" +
+                imwrite(f"{people}/흑백/{people}" +
                         str(imgNum) + f".{filetype}", cropped_gray)
                 print(f"[{people}{str(imgNum)}]: Cropped!")
                 imgNum += 1
