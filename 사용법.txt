@@ -1,0 +1,16 @@
+# 필름메이커스, 메가폰코리아 프로필 크롤링 - 폐기
+
+	profile_scrapper/main.py 실행
+	csv파일 생성 후 저장 중 에러가 난 경우 run save_by_csv.py 실행
+
+
+# 네이버 구글 키워드 연예인 크롤링
+	
+	keyword_scrapper/main.py 실행 (argument로 name 검색어 설정, ','로 다중 키워드 설정)
+	ex) python keyword_scrapper/main.py -name 검색어1, 검색어2, 검색어3
+
+
+# 얼굴 크롭시 여백 설정
+
+	keyword_scrapper/cropFace.py 실행 (원본 사진들을 keyword_scrapper 폴더에 넣어두어야 함)
+	cropFace.py 에서 margin, min_size 로 여백 및 최소크기 설정
